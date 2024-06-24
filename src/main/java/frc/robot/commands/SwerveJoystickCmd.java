@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.proto.System;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.DriveConstants;
@@ -79,12 +80,15 @@ public class SwerveJoystickCmd extends Command {
 
         // 4. Construct desired chassis speeds
         ChassisSpeeds chassisSpeeds;
+//TODO - for testing, add '!' to make robot oriented by default
         if (fieldOrientedFunction.get()) {
             // Relative to field
+                SmartDashboard.putString("mode","Field");
             chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
                     xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
         } else {
             // Relative to robot
+                SmartDashboard.putString("mode","Robot");
             chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
         }
 
