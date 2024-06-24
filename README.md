@@ -3,14 +3,14 @@ This is the swerve code we will use as a foundation to build off of for our 2024
 We are using the SDS Mk4 Swerve Modules with REV Neos and Spark MAX Motor controllers. For encoders, we are using Thrifty absolute magnetic encoders and the built-in Spark Max relative encoders.
 
 ### Current Status
-- Code Functions Properly
+- Code Functions Properly(ish)
 - Turning very sensitive
 
 ### To Do
-- Add turning deadband (will take 5 seconds).
 - Have programming team analyze code to make sure all members fully understand everything and where we are starting from.
-- Work on more advanced stuff like kinematics / odometry.
+- Work on more advanced stuff like kinematics / odometry for smoother driving.
 - Work on autonomous using PathPlanner / PathWeaver
+- Test robot and field orientation after adding gyro
 
 ### Created with help from these projects:
 - - [4534's 2023 Swerve Code](https://github.com/4534-WiredWizards/4534-Swerve-Public) - Thanks to our mentor team, the Wired Wizards, for helping us get our swerve drivetrain up and working, along with providing their swerve code.
