@@ -52,7 +52,7 @@ public class SwerveModule {
         driveMotor.restoreFactoryDefaults();
         turningMotor.restoreFactoryDefaults();
 
-        driveMotor.setIdleMode(IdleMode.kBrake);
+        driveMotor.setIdleMode(IdleMode.kCoast);
         //Used to be kBrake
 
         turningMotor.setIdleMode(IdleMode.kBrake);
@@ -80,6 +80,7 @@ public class SwerveModule {
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
 
         // absoluteEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
+//TODO - limit absolute encoder range to -180 to 180
 
         resetEncoders();
     }

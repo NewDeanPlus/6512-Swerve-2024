@@ -127,7 +127,8 @@ public final class Constants {
         public static final int kDriverRotAxis = 2;
         public static final int kDriverThrottleAxis = 3;
         // Deadband for the controller
-        public static final double kDeadband = 0.05;
+        public static final double kRotDeadband = .25; //0.05;
+        public static final double kDriveDeadband = .05;
         // Button used to enable robot orientation driving
         public static final int kDriverFieldOrientedButtonIdx = 5;
         // Button used to enable slow turning
