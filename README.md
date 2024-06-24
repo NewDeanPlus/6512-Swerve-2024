@@ -4,7 +4,7 @@ We are using the SDS Mk4 Swerve Modules with REV Neos and Spark MAX Motor contro
 
 ### Current Status
 - Code Functions Properly(ish)
-- Turning very sensitive
+- Turning sensitive
 
 ### To Do
 - Have programming team analyze code to make sure all members fully understand everything and where we are starting from.
