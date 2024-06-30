@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -106,14 +107,19 @@ public class SwerveSubsystem extends SubsystemBase {
 
     }
 
-    public void resetOdometry(Pose2d pose) {
+    public void resetOdometry(Pose2d pose) {  //resetPose() on other swerve codes
         odometer.resetPosition(getRotation2d(), getModulePositions(),pose);
         }
     
 
     @Override
     public void periodic() {
-        odometer.update(getRotation2d(), getModulePositions());
+
+        //drives swerve modules by updating values
+        swerveDrive();
+
+        //useful data outputted to SmartDashboard
+//TODO - make sure to comment out stuff if we don't need it any more. We need stuff on SmartDashboard to be as concise as possible to help drive the robot
         SmartDashboard.putNumber("Robot Heading", getHeading());
         SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
         SmartDashboard.putNumber("Back Right angle", (Units.radiansToDegrees(backRight.getAbsoluteEncoderRad())));
@@ -151,5 +157,27 @@ public class SwerveSubsystem extends SubsystemBase {
         frontRight.setDesiredState(desiredStates[1]);
         backLeft.setDesiredState(desiredStates[2]);
         backRight.setDesiredState(desiredStates[3]);
+    }
+
+    public SwerveModuleState[] getModuleStates(){
+        return new SwerveModuleState[]{
+            frontLeft.getState(),
+            frontRight.getState(),
+            backLeft.getState(),
+            backRight.getState()
+        };
+    }
+
+//TODO - test getRobotRelativeSpeeds() and drive() , these are supposedly needed for PathPlanner to work
+//these may not even be needed, we'll have to see
+
+    public ChassisSpeeds getRobotRelativeSpeeds() {  //returns current robot-relative chassisSpeeds
+        SwerveDriveKinematics k = new SwerveDriveKinematics();
+        ChassisSpeeds speeds = k.toChassisSpeeds(getModuleStates());
+        return speeds;
+    }
+
+    public void swerveDrive() {  //same drive function that was in periodic() before, just moved it to its own method
+        odometer.update(getRotation2d(), getModulePositions());
     }
 }
