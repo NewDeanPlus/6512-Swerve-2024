@@ -11,12 +11,15 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.proto.Kinematics;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.RobotContainer;
 import edu.wpi.first.math.util.Units;
@@ -65,6 +68,8 @@ public class SwerveSubsystem extends SubsystemBase {
             "Back Right");
 
             Joystick driverJoytick = RobotContainer.getDriverJoytick();
+
+            static SwerveDriveKinematics k = Constants.DriveConstants.kDriveKinematics;
 
     // AHRS is NavX gryo module
     private final AHRS gyro = new AHRS(SPI.Port.kMXP);
@@ -209,8 +214,12 @@ public class SwerveSubsystem extends SubsystemBase {
 //these may not even be needed, we'll have to see
 
     public ChassisSpeeds getRobotRelativeSpeeds() {  //returns current robot-relative chassisSpeeds
-        SwerveDriveKinematics k = new SwerveDriveKinematics();
-        ChassisSpeeds speeds = k.toChassisSpeeds(getModuleStates());
+        // SwerveDriveKinematics k = new SwerveDriveKinematics();
+        // ChassisSpeeds speeds = k.toChassisSpeeds(getModuleStates());
+        // return speeds;
+        SwerveModuleState[] states = new SwerveModuleState[4];
+        states = getModuleStates();
+        ChassisSpeeds speeds = k.toChassisSpeeds(states[0],states[1],states[2],states[3]);
         return speeds;
     }
 
@@ -219,7 +228,6 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public void swerveDriveRelative(ChassisSpeeds speeds) {
-        SwerveDriveKinematics k = new SwerveDriveKinematics();
         SwerveModuleState[] states = new SwerveModuleState[4];
         states = k.toSwerveModuleStates(speeds);
         setModuleStates(states);

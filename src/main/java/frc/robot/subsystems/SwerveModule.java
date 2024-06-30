@@ -52,7 +52,8 @@ public class SwerveModule {
         driveMotor.restoreFactoryDefaults();
         turningMotor.restoreFactoryDefaults();
 
-        driveMotor.setIdleMode(IdleMode.kCoast);
+        // driveMotor.setIdleMode(IdleMode.kCoast);
+        driveMotor.setIdleMode(IdleMode.kBrake);
         //Used to be kBrake
 
         turningMotor.setIdleMode(IdleMode.kBrake);
