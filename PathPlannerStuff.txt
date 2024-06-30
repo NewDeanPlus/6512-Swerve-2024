@@ -1,0 +1,19 @@
+https://docs.wpilib.org/en/stable/docs/software/pathplanning/pathweaver/integrating-robot-program.html
+
+- Also applies to PathPlanner
+
+https://github.com/mjansen4857/pathplanner
+
+- GitHub link to PathPlanner, also available on Windows Store
+
+https://pathplanner.dev/api/java/
+
+- PathPlanner Java docs
+
+https://pathplanner.dev/pplib-getting-started.html
+
+- PathPlanner docs (tutorial)
+
+- Use resetOdometry() instead of resetPose()
+- Add method to get relative speeds
+
