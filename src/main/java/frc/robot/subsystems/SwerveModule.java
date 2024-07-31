@@ -1,11 +1,8 @@
 package frc.robot.subsystems;
 
-
-import com.ctre.phoenix.sensors.AbsoluteSensorRange;
-import com.ctre.phoenix.sensors.CANCoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkLowLevel.*;
 import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.math.controller.PIDController;
@@ -46,7 +43,9 @@ public class SwerveModule {
         //absoluteEncoder = new CANCoder(absoluteEncoderId);
         absoluteEncoder = new ThriftyEncoder(absoluteEncoderId);
 
+        // driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
+        
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
 
         driveMotor.restoreFactoryDefaults();
