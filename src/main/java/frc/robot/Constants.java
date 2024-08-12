@@ -98,6 +98,9 @@ public final class Constants {
         public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond / 4;  // Slowed down for testing
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
+
+        //gyro offset in degrees (in case NavX is facing different direction on robot)
+        public static double kGyroOffset = 0;
     }
 
     public static final class AutoConstants {
@@ -130,9 +133,11 @@ public final class Constants {
         public static final double kRotDeadband = .25; //0.05;
         public static final double kDriveDeadband = .05;
         // Button used to enable robot orientation driving
-        public static final int kDriverFieldOrientedButtonIdx = 5;
+        // public static final int kDriverFieldOrientedButtonIdx = 5;
+        public static final int kDriverFieldOrientedButtonIdx = 1;
         // Button used to enable slow turning
-        public static final int kDriverSlowTurnButtonIdx=1;
+        // public static final int kDriverSlowTurnButtonIdx=1;
+        public static final int kDriverSlowTurnButtonIdx=5;
         // Button used to reset the gyro to 0
         public static final int kDriverResetGyroButtonIdx=2;
 
