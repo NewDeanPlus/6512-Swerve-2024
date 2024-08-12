@@ -81,7 +81,7 @@ public class SwerveJoystickCmd extends Command {
         // 4. Construct desired chassis speeds
         ChassisSpeeds chassisSpeeds;
 //TODO - for testing, add '!' to make robot oriented by default
-        if (fieldOrientedFunction.get()) {
+        if (!fieldOrientedFunction.get()) {
             // Relative to field
                 SmartDashboard.putString("mode","Field");
             chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(

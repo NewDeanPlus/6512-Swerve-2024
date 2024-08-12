@@ -9,6 +9,7 @@ import com.pathplanner.lib.util.ReplanningConfig;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -72,7 +73,7 @@ public class SwerveSubsystem extends SubsystemBase {
             static SwerveDriveKinematics k = Constants.DriveConstants.kDriveKinematics;
 
     // AHRS is NavX gryo module
-    private final AHRS gyro = new AHRS(SPI.Port.kMXP);
+    private final AHRS gyro = new AHRS(SerialPort.Port.kUSB);
     private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,
             new Rotation2d(0), 
             getModulePositions());
@@ -124,7 +125,7 @@ public class SwerveSubsystem extends SubsystemBase {
     }
 
     public double getHeading() {
-        return ((DriveConstants.kGyroInverted?-1.0:1.0) * Math.IEEEremainder(gyro.getAngle(), 360));
+        return ((DriveConstants.kGyroInverted?-1.0:1.0) * Math.IEEEremainder(gyro.getAngle(), 360)) + DriveConstants.kGyroOffset;
     }
 
   
@@ -183,6 +184,8 @@ public class SwerveSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("X Axis", driverJoytick.getX());
         SmartDashboard.putNumber("Y Axis", driverJoytick.getY());
         SmartDashboard.putNumber("Twist Axis", driverJoytick.getTwist());
+
+        SmartDashboard.putNumber("Gyro Heading", getHeading());
     }
 
     public void stopModules() {
